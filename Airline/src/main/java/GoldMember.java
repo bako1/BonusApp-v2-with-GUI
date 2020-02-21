@@ -6,8 +6,10 @@ import java.time.LocalDate;
  */
 
 public class GoldMember extends BonusMember {
-    public GoldMember(int memberNo, Personals personals, LocalDate enrolledDate) {
+    int bonusPoint;
+    public GoldMember(int memberNo, Personals personals, LocalDate enrolledDate,int bonusPoint) {
         super(memberNo, personals, enrolledDate);
+        this.bonusPoint=bonusPoint;
     }
 /**
  * Overrides method registerPint
@@ -18,7 +20,11 @@ public class GoldMember extends BonusMember {
 
     @Override
     public void registerPoints(int bonusPoints) {
-        bonusPoints*=FACTOR_GOLD;
+        bonusPoints *= FACTOR_GOLD;
         super.registerPoints(bonusPoints);
+    }
+
+    public int getBonusPoint() {
+        return bonusPoint;
     }
 }

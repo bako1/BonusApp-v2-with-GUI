@@ -95,8 +95,10 @@ class Personals {
     }
     boolean changeSuccessfull;
 
-    if (!password.equalsIgnoreCase(oldPassword.trim())) {
+    if (!password.equalsIgnoreCase(oldPassword.trim()))
+    {
       changeSuccessfull = false;
+
     } else {
       password = newPassword.trim();
       changeSuccessfull = true;

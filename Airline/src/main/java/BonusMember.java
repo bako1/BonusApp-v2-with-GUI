@@ -69,14 +69,14 @@ public class BonusMember {
      * return 0 otherwise
      * */
    public int findQualificationPoints(LocalDate enrolledDate){
+       long daysBetween = ChronoUnit.DAYS.between(this.enrolledDate,enrolledDate);
 
-       long daysBetween = ChronoUnit.DAYS.between(enrolledDate,this.enrolledDate );
-       System.out.println(daysBetween);
-       if(daysBetween<365 && daysBetween>0){
-           return this.bonusPoints;}
+       if(daysBetween<=365 && daysBetween>=0){
 
-       else return 0;
+           return this.bonusPoints;
 
+       }else
+           return 0;
    }
 /**
  * @param password user password
@@ -90,11 +90,12 @@ public class BonusMember {
    }
 /**
  * @param bonusPoints bonus points to register
- * increments adds newly earned point to the earlier bonusPoints if any
+ * adds newly earned point to the earlier bonusPoints if any
  * */
    public void registerPoints(int bonusPoints){
 
         this.bonusPoints+=bonusPoints;
+
 
     }
 

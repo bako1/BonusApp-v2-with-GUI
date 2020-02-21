@@ -4,8 +4,14 @@ import java.time.LocalDate;
  *
  * */
 public class SilverMember extends BonusMember {
-    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate) {
+    int bonusPoint;
+
+
+
+    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate, int bonusPint) {
         super(memberNo, personals, enrolledDate);
+        this.bonusPoint=bonusPint;
+
     }
 /**
  * Overrides the method registerPoints
@@ -16,9 +22,12 @@ public class SilverMember extends BonusMember {
 
     @Override
     public void registerPoints(int bonusPoints) {
-        bonusPoints*=FACTOR_SILVER;
+        bonusPoints*= FACTOR_SILVER;
 
         super.registerPoints(bonusPoints);
 
+    }
+    public int getBonusPoint() {
+        return bonusPoint;
     }
 }
