@@ -30,6 +30,14 @@ public class BonusMember {
 
     }
 
+    public BonusMember(int memberNo,Personals personals,LocalDate enrolledDate, int bonusPoints) {
+        this.memberNo = memberNo;
+        this.personals=personals;
+        this.enrolledDate=enrolledDate;
+        this.bonusPoints=bonusPoints;
+
+    }
+
 
 /**
  * @return memberNo return the member number of a user

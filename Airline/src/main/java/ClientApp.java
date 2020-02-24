@@ -1,32 +1,35 @@
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Inherits class MemberArchive
+ * */
 public class ClientApp extends MemberArchive {
-    private Personals personals;
     private Scanner scanner;
-private BonusMember bonusMember;
+    private BonusMember bonusMember;
 
     public ClientApp(){
         scanner=new Scanner(System.in);
-        personals=new Personals("Ole",
-                "Olsen","olsen@gmail.com","765");
+        new Personals("Ole",
+                "Olsen", "olsen@gmail.com", "765");
     }
 
 
     public  void init(){
 
-       addMember(personals=new Personals("Ole","Olsen",
+       addMember(new Personals("Ole","Olsen",
                "olsen@gmail.com","45"),
                LocalDate.of(2019,12,2));
-        addMember(personals=new Personals("Marion","Martin",
+        addMember(new Personals("Marion","Martin",
                         "marion@gmail.com","098765000"),
                 LocalDate.of(2019,2,12));
-        addMember(personals=new Personals("Eyban","Bako",
+        addMember(new Personals("Eyban","Bako",
                         "eyban@gmail.com","45549090"),
                 LocalDate.of(2019,11,28));
-        addMember(personals=new Personals("Hisam","Hamid",
+        addMember(new Personals("Hisam","Hamid",
                         "hisan@gmail.com","56655665"),
                 LocalDate.of(2019,1,1));
     }
@@ -57,6 +60,10 @@ private BonusMember bonusMember;
 
         System.out.println(" E-mail address: ");
         String emailAddress=scanner.next();
+        while (!emailAddress.contains("@")){
+            System.out.println("Invalid e-mail address");
+            emailAddress=scanner.next();
+        }
 
         System.out.println(" Password: ");
         String password=scanner.next();
@@ -66,14 +73,23 @@ private BonusMember bonusMember;
         }
 
 
-        System.out.println(" Enrolled date Year : ");
-        int year=readValidInteger();
-
-        System.out.println(" Enrolled date month: ");
+        System.out.println(" Enrolled Dte (yy mm dd) : ");
+        int year= readValidInteger();
         int month=readValidInteger();
-
-        System.out.println(" Enrolled date day: ");
         int day=readValidInteger();
+
+        try {
+
+            while (LocalDate.of(year,month,day).isAfter(LocalDate.now())) {
+            System.out.println("Enrollment date cannot be after today: try om " +
+                    ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.of(year, month, day)) + "  days");
+            year = scanner.nextInt();
+            month = scanner.nextInt();
+            day = scanner.nextInt();
+        }
+        }catch (Exception e){
+            System.out.println(e.getMessage() + " Invalid format");
+        }
         try {
             addMember(new Personals(firstName,surName,emailAddress,password),LocalDate.of(year,month,day));
 
@@ -142,7 +158,7 @@ private BonusMember bonusMember;
      *
      * */
    private int qualification(int memberNo, LocalDate dayToday){
-        int qualification=0;
+        int qualification=-1;
         for (BonusMember bm :displayMembers().values()){
             if(bm.getMemberNo()==memberNo){
                 qualification= bm.findQualificationPoints(dayToday);
@@ -154,26 +170,33 @@ private BonusMember bonusMember;
     public void foundQualification(){
         System.out.println("Member No: ");
         int memberNo=readValidInteger();
-        System.out.println(" Qualification Points: " + qualification(memberNo,LocalDate.now()));
+        if(qualification(memberNo,LocalDate.now())>=0){
+        System.out.println("Qualification Points: " + qualification(memberNo,LocalDate.now()));
+        }
+        else
+            System.out.println("No Member with "+memberNo+" exists");
     }
     public void displayAllMembers(){
-        System.out.println("\n");
-        System.out.println("MemberNo\t\t|FName\t\t|LName\t\t|E-mail" +
-                "Address  \t\t|Enrolled \t\t|EarnedPoints \t\t| Qualification Points");
-        System.out.println("\n------------------------------------------------------------------------------" +
-                "------------------------------------------------------------------------------------------");
+
+
+        System.out.println("***************** The Members********************");
+        System.out.println("\n+--------+-------------------+-------------------+--------" +
+                "-----------+--------------+--------------+--------------+--------------+");
+        System.out.printf("|%5s%20s%20s%20s%15s%15s%15s%15s","MemberNo|","FName|",
+                "LName|","E-mailAddress|","Enrolled|","EarnedPts|","Type|","Qualfic.Points| ");
+        System.out.println("\n+--------+-------------------+-------------------+--------" +
+                "-----------+--------------+--------------+--------------+--------------+");
 
       for (BonusMember bm :displayMembers().values())
         {
 
-            System.out.println(+bm.getMemberNo() + "\t\t|" + bm.getPersonals().getFirstName()
-                    + "\t\t|" + bm.getPersonals().getSurname() +
-                    "\t\t|" + bm.getPersonals().getEMailAddress() +
-                    "\t\t|" + bm.getEnrolledDate() + "\t\t| Points: "
-                    + bm.getBonusPoints()+"\t\t| "+qualification(bm.getMemberNo(), LocalDate.now()));
-            System.out.println("-----------------------------------------------------------------" +
-                    "----------------------------------------------------------------------------");
-
+            System.out.printf("|%5s%20s%20s%20s%15s%15s%15s%15s",bm.getMemberNo()+"|",bm.getPersonals().getFirstName()+"|",
+                    bm.getPersonals().getSurname()+'|',
+                   bm.getPersonals().getEMailAddress()+'|',
+                     bm.getEnrolledDate()+"|",
+                     bm.getBonusPoints() +"|", bm.getClass().getName()+'|',qualification(bm.getMemberNo(), LocalDate.now())+"|");
+            System.out.println("\n+--------+-------------------+-------------------+--------" +
+                    "-----------+--------------+--------------+--------------+--------------+");
     }
     }
 

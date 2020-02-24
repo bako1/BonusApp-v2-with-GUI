@@ -1,3 +1,5 @@
+
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UserInterface extends ClientApp {
@@ -9,7 +11,6 @@ public class UserInterface extends ClientApp {
     private static final int DISPLAY_MEMBERS=4;
     private static  final int SHOW_EARNED_POINTS=5;
     private static  final int SHOW_QUALIFICATION_POINTS=6;
-
     private static  final int QUIT=7;
 
 
@@ -22,9 +23,9 @@ public class UserInterface extends ClientApp {
     public int choices(){
 
         int choice=0;
-        System.out.println("--------------------------------------------");
+
 choice=0;
-        while (choice<=0 || choice>6){
+        while (choice<=0 || choice>7){
             System.out.println(" please enter a number between (1 and 7)");
 
             choice=readValidInteger();
@@ -35,52 +36,52 @@ choice=0;
 
     }
     private void menu(){
-        System.out.println("\n***********AirLine-Bonus App**********");
-        System.out.println(" Menu Choice:  ");
-        System.out.println("----------------------------------------");
-        System.out.println(" Add new member:***********************1");
-        System.out.println(" Register points:********************  2");
-        System.out.println(" Change Password :*******************  3");
-        System.out.println(" Display Members:********************* 4");
-        System.out.println(" Show earned points:*******************5");
-        System.out.println(" Show qualification points:************6");
+        System.out.println("\n************AirLine-Bonus App**********");
+        System.out.println(" \t\t\t\tMenu Choice  ");
+        System.out.println("+---------------------------------------- +");
+        System.out.println("| Add new member:---------------------->1 |");
+        System.out.println("| Register points:--------------------->2 |");
+        System.out.println("| Change Password:--------------------->3 |");
+        System.out.println("| Display Members:-------------------- >4 |");
+        System.out.println("| Show earned points:------------------>5 |");
+        System.out.println("| Show qualification points:----------->6 |");
+        System.out.println("| Quit: ------------------------------->7 |");
+        System.out.println("+---------------------------------------- +");
 
-        System.out.println("Quit: **********************************7");
     }
     public void menuChoice(){
 
 boolean quit=false;
 
-while (!quit){
-    menu();
+while (!quit) {
+    try {
+
+
+        menu();
         switch (choices()) {
             case ADD_NEW_MEMBER:
-                addNewMember();
-                break;
+                addNewMember();break;
             case REGISTER_POINTS:
-                registerPoint();
-                break;
+                registerPoint();break;
             case CHANGE_PASSWORD:
-                changePassword();
-                break;
+                changePassword();break;
             case DISPLAY_MEMBERS:
-                displayAllMembers();
-                break;
+                displayAllMembers();break;
             case SHOW_EARNED_POINTS:
-                findPoints(); break;
+                findPoints();break;
             case SHOW_QUALIFICATION_POINTS:
-                foundQualification(); break;
-
-                case QUIT:
+                foundQualification();break;
+            case QUIT:
                 System.out.println(" Closing the App...");
-                quit=true; break;
-
+                quit = true; break;
         }
 
-
-        }
-
+    }catch (NoSuchElementException n){
+        System.out.println(n.getMessage()+"  Exiting.... ");
+        break;
     }
 
+}
+    }
 
 }

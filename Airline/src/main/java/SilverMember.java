@@ -4,16 +4,16 @@ import java.time.LocalDate;
  *
  * */
 public class SilverMember extends BonusMember {
-    int bonusPoint;
+    //int bonusPoints;1
 
-
-
-    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate, int bonusPint) {
-        super(memberNo, personals, enrolledDate);
-        this.bonusPoint=bonusPint;
+    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate, int bonusPints) {
+        super(memberNo, personals, enrolledDate, bonusPints);
 
     }
-/**
+
+
+
+    /**
  * Overrides the method registerPoints
  * @param bonusPoints bonusPoints to be registered
  * Since its Silver member the point is calculated by multiplying a given bonusPoints
@@ -22,12 +22,12 @@ public class SilverMember extends BonusMember {
 
     @Override
     public void registerPoints(int bonusPoints) {
-        bonusPoints*= FACTOR_SILVER;
+        bonusPoints*=FACTOR_SILVER;
 
         super.registerPoints(bonusPoints);
 
     }
-    public int getBonusPoint() {
-        return bonusPoint;
-    }
+    /*public int getBonusPoints() {
+        return super.getBonusPoints();
+    }*/
 }
