@@ -1,4 +1,6 @@
-
+/**
+ * Min class
+ * */
 public class Main {
 
 
