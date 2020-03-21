@@ -79,7 +79,7 @@ TableView<TableClass> tableView = new TableView<>();
         personalObservableList.addAll(tableClass1,tableClass2,tableClass3,tableClass4);
 
 
-        System.out.println(memberArchive.displayMembers());
+      //  System.out.println(memberArchive.displayMembers());
         return personalObservableList;
     }
 
@@ -174,7 +174,7 @@ try {
 
         });
 
-        System.out.println(memberArchive.displayMembers());
+      //  System.out.println(memberArchive.displayMembers());
 
         stage.initModality((Modality.APPLICATION_MODAL));
         stage.setScene(scene);
@@ -213,7 +213,7 @@ try {
                             if (points > 0) {
                                 memberArchive.checkMembers(LocalDate.now());
                                 memberArchive.registerPoints(selectedItem.memberNo, points);
-                                System.out.println(memberArchive.displayMembers());
+                              //  System.out.println(memberArchive.displayMembers());
                             }
 
                         } catch (NumberFormatException e) {

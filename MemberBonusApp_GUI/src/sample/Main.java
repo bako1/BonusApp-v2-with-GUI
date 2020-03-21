@@ -240,13 +240,13 @@ tableBox.getChildren().addAll(adddshdel);
                         deleteMember.setOnAction(remove ->controller.onDeleteClicked());
                         registerPoint.setOnAction(reg ->controller.onRegisterClicked());
                     seeDetail.setOnAction(see->controller.onSeeDetail());
-                        System.out.println(memberArchive.displayMembers());
+                       // System.out.println(memberArchive.displayMembers());
 
 
                     }
 
                 } catch (NullPointerException e) {
-                    System.out.println(e.getMessage());
+                  //  System.out.println(e.getMessage());
                 }
             }
         });

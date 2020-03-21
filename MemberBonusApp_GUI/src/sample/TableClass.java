@@ -11,7 +11,8 @@ public class TableClass extends BonusMember {
 
 
 
-    public TableClass(int memberNo, Personals personals, LocalDate enrolledDate, int bonusPoints) {
+    public TableClass(int memberNo, Personals personals, LocalDate enrolledDate,
+                      int bonusPoints) {
         super(memberNo, personals, enrolledDate, bonusPoints);
         this.firstName = personals.getFirstName();
         this.surname = personals.getSurname();
@@ -29,9 +30,6 @@ public class TableClass extends BonusMember {
     public String getSurname() {
         return surname;
     }
-//public int getMemberNo(){
-  //      return memberNo;
-//}
 
 
 }
