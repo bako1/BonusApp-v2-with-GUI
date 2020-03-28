@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application  {
   private Controller controller = new Controller();
-  private String buttonsBorderColor = "-fx-border-color: red";
 
 
 
@@ -65,8 +64,9 @@ public class Main extends Application  {
 
 
 
+   //Buttons border color
+  String buttonsBorderColor = "-fx-border-color: red";
     //Delete Button
-
     Button deleteM = new Button("Remove");
     deleteM.setBackground(new Background(new
         BackgroundFill(Color.GRAY,CornerRadii.EMPTY,Insets.EMPTY)));
@@ -141,10 +141,10 @@ public class Main extends Application  {
         BackgroundFill(Color.PALEGOLDENROD,CornerRadii.EMPTY,Insets.EMPTY)));
     adddshdel.getChildren().addAll(addNew,deleteM,showDetails,registerPoints);
 
-    /*
-     * Table view
 
-     */
+     // Table view
+
+  
 
     controller.tableView.getOnScroll();
     controller.tableView.getColumns().addAll(surname, firstName,memberNo);
@@ -244,6 +244,7 @@ public class Main extends Application  {
           }
 
         } catch (NullPointerException e) {
+
           System.out.println(e.getMessage());
         }
       }
