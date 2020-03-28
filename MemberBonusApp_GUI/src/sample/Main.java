@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,11 +17,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class Main extends Application implements EventHandler {
-    private MemberArchive memberArchive = new MemberArchive();
-    private Controller controller = new Controller();
-
-
+public class Main extends Application  {
+  private Controller controller = new Controller();
 
 
 
@@ -70,11 +65,11 @@ public class Main extends Application implements EventHandler {
         /***
          * Add set onAction
          */
-       addNew.setOnAction(add->{
-       controller.onAddClicked();
+       addNew.setOnAction(add->
+       controller.onAddClicked());
 
 
-       });
+
 
 
         Button deleteM = new Button("Remove");
@@ -103,19 +98,19 @@ public class Main extends Application implements EventHandler {
 
         registerPoints.setBackground(new Background(new BackgroundFill(Color.GRAY,CornerRadii.EMPTY,Insets.EMPTY)));
 
-        showDetails.setOnAction(show->{controller.onSeeDetail();});
-
+        showDetails.setOnAction(show->controller.onSeeDetail());
+        String borderColor = "-fx-border-color: red";
 
         addNew.setPrefSize(100,70);
-        addNew.setStyle("-fx-border-color: red");
+        addNew.setStyle(borderColor);
         deleteM.setPrefSize(100,70);
-        deleteM.setStyle("-fx-border-color: red");
+        deleteM.setStyle(borderColor);
 
         showDetails.setPrefSize(100,70);
-        showDetails.setStyle("-fx-border-color: red");
+        showDetails.setStyle(borderColor);
 
         registerPoints.setPrefSize(100,70);
-        registerPoints.setStyle("-fx-border-color: red");
+        registerPoints.setStyle(borderColor);
 
 
         Image image4 = new Image(getClass().getResourceAsStream("registerP.png"));
@@ -200,9 +195,8 @@ tableBox.getChildren().addAll(adddshdel);
         Button delete = new Button("Delete");
         //set on action
         delete.setOnAction(d ->
-        {
-           controller.onDeleteClicked();
-        });
+
+           controller.onDeleteClicked());
 
         HBox hBox = new HBox();
 /***
@@ -213,7 +207,6 @@ tableBox.getChildren().addAll(adddshdel);
         MenuItem seeDetail;
         MenuItem deleteMember;
         MenuItem registerPoint;
-        MenuItem update;
         ContextMenu contextMenu;
 
 
@@ -221,7 +214,6 @@ tableBox.getChildren().addAll(adddshdel);
 
         deleteMember = new MenuItem(" Remove");
         registerPoint = new MenuItem("Register Point");
-        update = new MenuItem("Update");
         contextMenu = new ContextMenu();
 
         contextMenu.getItems().addAll(seeDetail, deleteMember, registerPoint);
@@ -240,13 +232,12 @@ tableBox.getChildren().addAll(adddshdel);
                         deleteMember.setOnAction(remove ->controller.onDeleteClicked());
                         registerPoint.setOnAction(reg ->controller.onRegisterClicked());
                     seeDetail.setOnAction(see->controller.onSeeDetail());
-                       // System.out.println(memberArchive.displayMembers());
 
 
                     }
 
                 } catch (NullPointerException e) {
-                  //  System.out.println(e.getMessage());
+                  System.out.println(e.getMessage());
                 }
             }
         });
@@ -338,7 +329,7 @@ log.setOnAction(e->{
         username.setStyle("-fx-border-color: #ff2c1a");
 
 
-        pass.setStyle("-fx-border-color: red");;
+        pass.setStyle("-fx-border-color: red");
         message.setText(" Username and/or password is incorrect");
         message.setStroke(Color.RED);
         message.setFont(Font.font("Times New Roman",20));
@@ -366,11 +357,7 @@ log.setOnAction(e->{
         launch(args);
     }
 
-    @Override
-    public void handle(Event event) {
 
-
-    }
 
 
 
