@@ -1,5 +1,6 @@
 package sample;
 
+import java.io.File;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,17 +18,22 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
+
+
 public class Main extends Application  {
   private Controller controller = new Controller();
 
 
 
 
-
   @Override
   public void start(Stage primaryStage) throws Exception {
-
-
 
     // table column for first name
 
@@ -362,6 +368,17 @@ public class Main extends Application  {
 
   public static void main(String[] args) {
     launch(args);
+
+    org.apache.log4j.Logger logger = LogManager.getRootLogger();
+
+    PropertyConfigurator.configure("properties/log4j.properties");
+
+
+    BasicConfigurator.configure();
+    logger.info("hmmmm");
+    logger.error("ajab erroe");
+    logger.warn("warn");
+    logger.fatal("fatal");
   }
 
 

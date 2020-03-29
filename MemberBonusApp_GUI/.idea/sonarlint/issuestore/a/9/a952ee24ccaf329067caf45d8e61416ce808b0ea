@@ -1,10 +1,10 @@
 
-f	java:S117e"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¶éê
-k	java:S117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ð÷ýÔýÿÿÿÿ
-i
-java:S3776¾"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(×Ûè«
-Q	java:S125R"<This block of commented-out lines of code should be removed.(ðç÷¬
 R	java:S125±"<This block of commented-out lines of code should be removed.(ðç÷¬
 R	java:S125Ø"<This block of commented-out lines of code should be removed.(ðç÷¬
 R	java:S125š"<This block of commented-out lines of code should be removed.(±ÙÏ°
 R	java:S125§"<This block of commented-out lines of code should be removed.(±ÙÏ°
+k	java:S117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ð÷ýÔýÿÿÿÿ
+i
+java:S3776¾"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(×Ûè«
+Q	java:S125R"<This block of commented-out lines of code should be removed.(ðç÷¬
+f	java:S117e"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¶éê

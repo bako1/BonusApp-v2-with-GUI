@@ -1,2 +1,6 @@
 
-[	java:S106ğ"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8İ¥‰’.
+F
+java:S1128")Remove this unused import 'java.io.File'.(†Ğ¥Å8ı˜æ°’.
+P
+java:S1128"4Remove this unused import 'org.apache.log4j.Logger'.(ñè½8‡æÖ±’.
+[	java:S106ş"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8—óø¯’.
