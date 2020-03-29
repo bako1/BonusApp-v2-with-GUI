@@ -17,8 +17,6 @@ O
 src/sample/BonusMemberTest.java,8\f\8ffbc1454ad00713d7151eafc3ca7459263eab1c
 D
 src/module-info.java,c\d\cdc434daeee688944ced38ff1c9875422db88382
-D
-src/log4j.properties,3\b\3b63962158fa3a4afdae481f2aa7bb172d2b4800
 K
 properties/log4j.properties,5\1\51bded994853bf9bca42e43da6bb5aea7d5ad457
 B

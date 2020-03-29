@@ -63,6 +63,20 @@ class BonusMemberTest{
   }
 
   /**
+   * constructor test
+
+   * **/
+  @Test
+  public void testInvalidParameterTest(){
+    try {
+      BonusMember bm = new BasicMember(12,null,null);
+      logger.info("fail parameter(s)");
+    }catch (IllegalArgumentException e){
+
+    };
+  }
+
+  /**
    * Tests the accuracy of the calculation of points for the absic member Tove,
    * who was registered with basic membership less than 365 days before 10/2-2008,
    * and hence does qualify for an upgrade, first to Silver, then to Gold.
@@ -100,9 +114,7 @@ class BonusMemberTest{
 
   }
 
-  /**
-   * Tests the passwords of both members.
-   */
+
   @Test
   void testPasswords() {
     logger.error("Test nr 7: Trying wrong password on Ole");
@@ -110,4 +122,6 @@ class BonusMemberTest{
     logger.info("Test nr 8: Trying correct password on Tove.");
     assertTrue(tove.okPassword("tove"));
   }
+
+
 }

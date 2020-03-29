@@ -29,14 +29,18 @@ import org.apache.log4j.PropertyConfigurator;
 public class Main extends Application  {
   private Controller controller = new Controller();
 
+  org.apache.log4j.Logger logger = LogManager.getRootLogger();
 
 
 
   @Override
   public void start(Stage primaryStage) throws Exception {
 
-    // table column for first name
+//log4j config
+    PropertyConfigurator.configure("properties/log4j.properties");
+    BasicConfigurator.configure();
 
+    // table column for first name
 
 
     TableColumn<TableClass, String> firstName = new TableColumn<>("firstName");
@@ -251,7 +255,7 @@ public class Main extends Application  {
 
         } catch (NullPointerException e) {
 
-          System.out.println(e.getMessage());
+         logger.info(e.getMessage());
         }
       }
     });
@@ -353,32 +357,14 @@ public class Main extends Application  {
     });
     stageLog.show();
 
-
-
-
-
-
-
-
-
-
-
   }
 
 
   public static void main(String[] args) {
     launch(args);
 
-    org.apache.log4j.Logger logger = LogManager.getRootLogger();
-
-    PropertyConfigurator.configure("properties/log4j.properties");
 
 
-    BasicConfigurator.configure();
-    logger.info("hmmmm");
-    logger.error("ajab erroe");
-    logger.warn("warn");
-    logger.fatal("fatal");
   }
 
 

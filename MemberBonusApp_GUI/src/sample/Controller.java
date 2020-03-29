@@ -174,7 +174,6 @@ try {
 
         });
 
-      //  System.out.println(memberArchive.displayMembers());
 
         stage.initModality((Modality.APPLICATION_MODAL));
         stage.setScene(scene);
@@ -220,6 +219,7 @@ try {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setContentText("Invalid Input Only numbers Allowed");
                             alert.show();
+
 
                         }
 

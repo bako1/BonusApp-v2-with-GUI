@@ -7,10 +7,11 @@ import java.time.LocalDate;
  *
  * */
 public class SilverMember extends BonusMember {
-    //int bonusPoints;1
+  //  int bonusPoints;
 
-    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate, int bonusPints) {
-        super(memberNo, personals, enrolledDate, bonusPints);
+    public SilverMember(int memberNo, Personals personals, LocalDate enrolledDate,int bonusPoints) {
+        super(memberNo, personals, enrolledDate);
+       super.registerPoints(bonusPoints);
 
     }
 

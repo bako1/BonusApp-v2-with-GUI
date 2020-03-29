@@ -26,22 +26,24 @@ public class BonusMember {
 
   public BonusMember(int memberNo,Personals personals,LocalDate enrolledDate) {
 
-    this.memberNo = memberNo;
-    this.personals = personals;
-    this.enrolledDate = enrolledDate;
-    this.bonusPoints = 0;
-
-
-
-  }
-
-  public BonusMember(int memberNo,Personals personals,LocalDate enrolledDate, int bonusPoints) {
-    this.memberNo = memberNo;
-    this.personals = personals;
-    this.enrolledDate = enrolledDate;
-    this.bonusPoints = bonusPoints;
+      if (memberNo < 0) {
+        throw new IllegalArgumentException("Member number cannot be negative: " + memberNo);
+      }
+      if (personals == null || enrolledDate == null) {
+        throw new IllegalArgumentException("Parameter personals or enrolledDate was null");
+      }
+      this.memberNo = memberNo;
+      this.personals = personals;
+      this.enrolledDate = enrolledDate;
+      this.bonusPoints = 0;
 
   }
+
+
+
+
+
+
 
 
   /**
