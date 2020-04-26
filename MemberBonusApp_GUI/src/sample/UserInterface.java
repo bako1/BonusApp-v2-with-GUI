@@ -1,10 +1,13 @@
 package sample;
 
 
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 public class UserInterface extends ClientApp {
 
-}
-    /*
+
+
     MemberArchive memberArchive;
     Scanner scanner;
     private static final int ADD_NEW_MEMBER=1;
@@ -87,4 +90,4 @@ while (!quit) {
     }
 
 }
-*/
+

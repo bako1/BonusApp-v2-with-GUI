@@ -4,21 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.apache.logging.log4j.core.LoggerContext;
 
 import java.time.LocalDate;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.PropertyConfigurator;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 import org.junit.jupiter.api.Test;
 
 
 class BonusMemberTest{
 
-  org.apache.log4j.Logger logger = LogManager.getRootLogger();
-
-
-  //private static org.apache.log4j.Logger logger
-  //    = Logger.getLogger(BonusMemberTest.class);
+  private static Logger logger = LogManager.getLogger(BonusMemberTest.class);
 
 
 
@@ -28,6 +27,11 @@ class BonusMemberTest{
 
   @org.junit.jupiter.api.BeforeEach
   void setUp() {
+    LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+    //File file = new File("app.log");
+    //System.out.println("Name\t"+file);
+    //context.setName("properties/log4j2.properties");
+
 
     this.testDate = LocalDate.of(2008, 2, 10);
     this.ole = new Personals("Olsen", "Ole",
@@ -39,10 +43,7 @@ class BonusMemberTest{
   @Test
   void testBasicMemberOle() {
 
-    PropertyConfigurator.configure("properties/log4j.properties");
 
-
-    BasicConfigurator.configure();
 
 
 

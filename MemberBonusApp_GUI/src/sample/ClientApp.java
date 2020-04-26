@@ -1,4 +1,7 @@
+
 package sample;
+
+
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -21,9 +24,9 @@ public class ClientApp extends MemberArchive {
 
     public  void init(){
 
-       addMember(new Personals("Ole","Olsen",
-               "olsen@gmail.com","45"),
-               LocalDate.of(2019,12,2));
+        addMember(new Personals("Ole","Olsen",
+                        "olsen@gmail.com","45"),
+                LocalDate.of(2019,12,2));
         addMember(new Personals("Marion","Martin",
                         "marion@gmail.com","098765000"),
                 LocalDate.of(2019,2,12));
@@ -38,14 +41,14 @@ public class ClientApp extends MemberArchive {
     public int readValidInteger(){
         int number=0;
 
-            try {
-                    number = scanner.nextInt();
+        try {
+            number = scanner.nextInt();
 
-            } catch (InputMismatchException e) {
-                System.out.println("\tPlease enter only an integer");
-                scanner.next();
+        } catch (InputMismatchException e) {
+            System.out.println("\tPlease enter only an integer");
+            scanner.next();
 
-            }
+        }
         return number;
 
     }
@@ -70,7 +73,7 @@ public class ClientApp extends MemberArchive {
         String password=scanner.next();
         while (password.length()<8){
             System.out.println(" weak Password! minimum character length is 8:  ");
-           password=scanner.next();
+            password=scanner.next();
         }
 
 
@@ -82,12 +85,12 @@ public class ClientApp extends MemberArchive {
         try {
 
             while (LocalDate.of(year,month,day).isAfter(LocalDate.now())) {
-            System.out.println("Enrollment date cannot be after today: try om " +
-                    ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.of(year, month, day)) + "  days");
-            year = scanner.nextInt();
-            month = scanner.nextInt();
-            day = scanner.nextInt();
-        }
+                System.out.println("Enrollment date cannot be after today: try om " +
+                        ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.of(year, month, day)) + "  days");
+                year = scanner.nextInt();
+                month = scanner.nextInt();
+                day = scanner.nextInt();
+            }
         }catch (Exception e){
             System.out.println(e.getMessage() + " Invalid format");
         }
@@ -103,16 +106,16 @@ public class ClientApp extends MemberArchive {
 
         int memberNo=0;
         while (memberNo<=0){
-        System.out.println("member Number( ' > 0'): ");
-         memberNo = readValidInteger();
+            System.out.println("member Number( ' > 0'): ");
+            memberNo = readValidInteger();
         }
         int points=0;
         while (points<=0 ){
-        System.out.println(" points to register '( > 0 )': ");
-      points =readValidInteger();
-      checkMembers(LocalDate.now());
+            System.out.println(" points to register '( > 0 )': ");
+            points =readValidInteger();
+            checkMembers(LocalDate.now());
 
-      registerPoints(memberNo,points);
+            registerPoints(memberNo,points);
 
         }
     }
@@ -130,11 +133,11 @@ public class ClientApp extends MemberArchive {
 
         {
 
-        displayMembers().entrySet().stream()
-                .filter(pass-> pass.getKey()==memberNo &&
-                        pass.getValue().getPersonals()
-                                .changePassword(oldPassword,newPassword) )
-                .forEach(pass-> System.out.println("Password is successfully changed"));
+            displayMembers().entrySet().stream()
+                    .filter(pass-> pass.getKey()==memberNo &&
+                            pass.getValue().getPersonals()
+                                    .changePassword(oldPassword,newPassword) )
+                    .forEach(pass-> System.out.println("Password is successfully changed"));
         }
 
 
@@ -143,7 +146,7 @@ public class ClientApp extends MemberArchive {
         System.out.println("Member Number: ");
         int memberNo=0;
         while (memberNo<=0){
-         memberNo=readValidInteger();
+            memberNo=readValidInteger();
         }
 
         System.out.println("password : ");
@@ -158,7 +161,7 @@ public class ClientApp extends MemberArchive {
      * or zero
      *
      * */
-   private int qualification(int memberNo, LocalDate dayToday){
+    private int qualification(int memberNo, LocalDate dayToday){
         int qualification=-1;
         for (BonusMember bm :displayMembers().values()){
             if(bm.getMemberNo()==memberNo){
@@ -172,15 +175,15 @@ public class ClientApp extends MemberArchive {
         System.out.println("Member No: ");
         int memberNo=readValidInteger();
         if(qualification(memberNo,LocalDate.now())>=0){
-        System.out.println("Qualification Points: " + qualification(memberNo,LocalDate.now()));
+            System.out.println("Qualification Points: " + qualification(memberNo,LocalDate.now()));
         }
         else
             System.out.println("No Member with "+memberNo+" exists");
     }
 
-    public String displayAllMembers(){
+    public void displayAllMembers(){
 
-/*
+
 
         System.out.println("***************** The Members********************");
         System.out.println("\n+--------+-------------------+-------------------+--------" +
@@ -189,34 +192,30 @@ public class ClientApp extends MemberArchive {
                 "LName|","E-mailAddress|","Enrolled|","EarnedPts|","Type|","Qualfic.Points| ");
         System.out.println("\n+--------+-------------------+-------------------+--------" +
                 "-----------+--------------+--------------+--------------+--------------+");
-*/
-//String memberList = null;
-      //for (BonusMember bm :displayMembers().values())
-        //{
 
-            /*System.out.printf("|%5s%20s%20s%20s%15s%15s%15s%15s",bm.getMemberNo()+"|",bm.getPersonals().getFirstName()+"|",
+        String memberList = null;
+        for (BonusMember bm :displayMembers().values())
+        {
+
+            System.out.printf("|%5s%20s%20s%20s%15s%15s%15s%15s",bm.getMemberNo()+"|",bm.getPersonals().getFirstName()+"|",
                     bm.getPersonals().getSurname()+'|',
-                   bm.getPersonals().getEMailAddress()+'|',
-                     bm.getEnrolledDate()+"|",
-                     bm.getBonusPoints() +"|", bm.getClass().getName()+'|',qualification(bm.getMemberNo(), LocalDate.now())+"|");
+                    bm.getPersonals().getEMailAddress()+'|',
+                    bm.getEnrolledDate()+"|",
+                    bm.getBonusPoints() +"|", bm.getClass().getName().substring(7)+'|',qualification(bm.getMemberNo(), LocalDate.now())+"|");
             System.out.println("\n+--------+-------------------+-------------------+--------" +
 
                     "-----------+--------------+--------------+--------------+--------------+");
 
-             */
-                  /*  memberList = bm.getMemberNo()+"\t"+bm.getPersonals().getFirstName()+"\t"+
+
+            memberList = bm.getMemberNo()+"\t"+bm.getPersonals().getFirstName()+"\t"+
                     bm.getPersonals().getSurname()+'\t'+
                     bm.getPersonals().getEMailAddress()+'\t'+
                     bm.getEnrolledDate()+"\t"+
                     bm.getBonusPoints() +"\t"+ bm.getClass().getName()+'\t'+qualification(bm.getMemberNo(), LocalDate.now())+"\n";
-*/
-       // }
-       // return memberList;
 
-String s=displayMembers().values().toString();
-        s=displayMembers().values().toString().substring(1,s.length()-1).replace(',',' ');
+        }
 
-        return s;
+
     }
 
 

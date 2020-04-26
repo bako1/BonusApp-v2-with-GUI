@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.*;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,8 +20,8 @@ import java.util.Optional;
  * **/
 
 public class Controller {
-MemberArchive memberArchive=new MemberArchive();
-TableView<TableClass> tableView = new TableView<>();
+    MemberArchive memberArchive=new MemberArchive();
+    TableView<TableClass> tableView = new TableView<>();
 
     TextArea basicMember = new TextArea();
 
@@ -35,14 +36,14 @@ TableView<TableClass> tableView = new TableView<>();
 
 
 
-/**
- * @return returns observableList av type TableClass class
- * The method initiate() -> instantiates The class Personal and adds
- * the object to the hash map by calling addMember() of memberArchive class.
- *
- *
- *
- * **/
+    /**
+     * @return returns observableList av type TableClass class
+     * The method initiate() -> instantiates The class Personal and adds
+     * the object to the hash map by calling addMember() of memberArchive class.
+     *
+     *
+     *
+     * **/
 
     public ObservableList<TableClass> initiate() {
 //creating p1 object
@@ -70,25 +71,25 @@ TableView<TableClass> tableView = new TableView<>();
                 "ghhh45");
         int memberNum4 =   memberArchive.addMember(p4,LocalDate.of(2018,11,8));
 
-        TableClass tableClass1=new TableClass(memberNum1,p1,LocalDate.of(2020,6,8),5050);
-        TableClass tableClass2=new TableClass(memberNum2,p2,LocalDate.of(2020,4,2),3050);
-        TableClass tableClass3=  new TableClass(memberNum3,p3,LocalDate.of(2019,6,8),50050);
-        TableClass tableClass4=  new TableClass(memberNum4,p4,LocalDate.of(2018,11,8),75000);
+        TableClass tableClass1=new TableClass(memberNum1,p1,LocalDate.of(2020,6,8));
+        TableClass tableClass2=new TableClass(memberNum2,p2,LocalDate.of(2020,4,2));
+        TableClass tableClass3=  new TableClass(memberNum3,p3,LocalDate.of(2019,6,8));
+        TableClass tableClass4=  new TableClass(memberNum4,p4,LocalDate.of(2018,11,8));
 
 
         personalObservableList.addAll(tableClass1,tableClass2,tableClass3,tableClass4);
 
 
-      //  System.out.println(memberArchive.displayMembers());
+
         return personalObservableList;
     }
 
 
 
 
-/**
- * 
- * */
+    /**
+     * Handles Add new Users event
+     * */
 
 
     public void onAddClicked()  {
@@ -145,30 +146,32 @@ TableView<TableClass> tableView = new TableView<>();
         root.setPadding(new Insets(10,30,20,20));
         Scene scene = new Scene(vBox,500,500);
 
+        cancel.setOnAction(toCancel->stage.close());
+
 
 
         save.setOnAction(toSave->{
 
-try {
+            try {
 
 
-    Personals personals = new Personals(firstName.getText(), surname.getText(),
-            e_mail.getText(), pass.getText());
+                Personals personals = new Personals(firstName.getText(), surname.getText(),
+                        e_mail.getText(), pass.getText());
 
-    int memberNumb = memberArchive.addMember(personals, datePicker.getValue());
-    TableClass tableClass = new TableClass(memberNumb, personals, datePicker.getValue(), 0);
-    personalObservableList.removeAll(tableClass); //removes what already available in the table,helps to refresh the table
-    personalObservableList.addAll(tableClass);  //Adds up to dated value to the table
+                int memberNumb = memberArchive.addMember(personals, datePicker.getValue());
+                TableClass tableClass = new TableClass(memberNumb, personals, datePicker.getValue());
+                personalObservableList.removeAll(tableClass); //removes what already available in the table,helps to refresh the table
+                personalObservableList.addAll(tableClass);  //Adds up to dated value to the table
 
-    firstName.clear();
-    surname.clear();
-    pass.clear();
-    e_mail.clear();
+                firstName.clear();
+                surname.clear();
+                pass.clear();
+                e_mail.clear();
 
-}catch (IllegalArgumentException e){
-  Label eMessage = new Label();
-    eMessage.setText(e.getMessage());
-}
+            }catch (IllegalArgumentException e){
+                Label eMessage = new Label();
+                eMessage.setText(e.getMessage());
+            }
 
 
 
@@ -185,7 +188,9 @@ try {
 
 
 
-
+    /**
+     * Handles the register key
+     * **/
     public void onRegisterClicked() {
 
         //selected Item from a table
@@ -197,8 +202,8 @@ try {
                 if (selectedItem.memberNo == bm.getMemberNo()) {
 
                     inputDialog = new TextInputDialog();
-                    inputDialog.setHeaderText("Register Point Dialog");
-                    inputDialog.setTitle("Point registration");
+                    inputDialog.setHeaderText("Points to register");
+                    inputDialog.setTitle("Register Point Dialog");
 
                     Optional<String> response = inputDialog.showAndWait();
 
@@ -212,7 +217,7 @@ try {
                             if (points > 0) {
                                 memberArchive.checkMembers(LocalDate.now());
                                 memberArchive.registerPoints(selectedItem.memberNo, points);
-                              //  System.out.println(memberArchive.displayMembers());
+                                //  System.out.println(memberArchive.displayMembers());
                             }
 
                         } catch (NumberFormatException e) {
@@ -248,11 +253,12 @@ try {
             alert.showAndWait();
             if (alert.getResult()== ButtonType.OK) {
                 //Remove selected Item from the table
-               tableView.getItems().remove(selectedItem);
-                //Remove yhe selected item from the collection(HashMap)
+                tableView.getItems().remove(selectedItem);
+                //Remove the selected item from the collection(HashMap)
                 memberArchive.displayMembers().remove(selectedItem.memberNo);
                 Alert alert1=new Alert(Alert.AlertType.INFORMATION,
                         "You have "+" Successfully removed  "+selectedItem.surname)  ;
+                System.out.println(memberArchive.displayMembers().size());
 
                 alert1.show();}}
 
@@ -271,7 +277,7 @@ try {
                     String type = bm.getClass().getName().substring(7).replace("Member", " ");
                     String detailInfo = "Member Type: \t" + type + "\n" + "Full Name:  " +
                             "  \t" + bm.getPersonals().getSurname() + " , " + bm.getPersonals().getFirstName() + "\n"
-                           +"E-mail:\t"+bm.getPersonals().getEMailAddress()+"\n"+
+                            +"E-mail:\t"+bm.getPersonals().getEMailAddress()+"\n"+
                             "Enrolled Date: \t"+bm.getEnrolledDate()+"\n"
                             + "MemberNo:    \t" + bm.getMemberNo() + "\n" +
                             "Earned Points: \t" + bm.getBonusPoints() + "\n";
@@ -286,16 +292,16 @@ try {
                     } else if (bm instanceof SilverMember) {
 
 
-
-
-
                         silverMember.setText(detailInfo);
                         silverMember.setEditable(false);
+                        silverMember.setStyle("-fx-background-color: silver");
                     }else {
-                        //memberArchive.checkMembers(LocalDate.now());
 
                         goldMember.setText(detailInfo);
                         goldMember.setEditable(false);
+                        goldMember.setBackground(new Background(
+                                new BackgroundFill(Color.DARKGOLDENROD,CornerRadii.EMPTY,Insets.EMPTY)));
+
                     }
 
 
@@ -309,21 +315,43 @@ try {
         }
 
     }
+    private void onExitClicked(){
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION,"Close the App",
+                ButtonType.YES,ButtonType.NO);
+        alert.setTitle("CLOSE");
 
+        alert.showAndWait();
+        if(alert.getResult()==ButtonType.YES){
+            System.exit(0);
+        }
+    }
+    /**
+     *Menu
+     * @return returns menuBar
+     * **/
+    public MenuBar menuBars(){
+        MenuBar menuBar = new MenuBar();
+        //Menu
+        Menu menu =  new Menu(" Select from\n the options");
+        menuBar.setMinHeight(60);
 
+        MenuItem addNewUser = new MenuItem("Add New User");
+        addNewUser.setOnAction(add->onAddClicked());
 
+        MenuItem registerPoints = new MenuItem("Register Points to the selected Item");
+        registerPoints.setOnAction(e->onRegisterClicked());
+        MenuItem deleteUser = new MenuItem("Delete selected User ");
+        deleteUser.setOnAction(delete-> onDeleteClicked());
 
+        MenuItem showDetails = new MenuItem("Show Details of the selected Item ");
+        showDetails.setOnAction(show->onSeeDetail());
+        MenuItem exit = new MenuItem("Exit the App ");
+        exit.setOnAction(exits->onExitClicked());
 
+        menu.getItems().addAll(addNewUser,registerPoints,deleteUser,showDetails,exit);
+        menuBar.getMenus().add(menu);
 
-
-
-
-
-
-
-
-
-
-
+        return menuBar;
+    }
 
 }
